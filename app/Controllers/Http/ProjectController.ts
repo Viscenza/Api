@@ -4,21 +4,21 @@ import Project from "App/Models/Project";
 export default class ProjectsController {
   public async index(ctx: HttpContextContract) {
     try {
-      let project = await Project.all();
-      return { project };
+      let projects = await Project.all();
+      let projectJson = projects.map((project) => project.serialize());
+      console.log(projectJson);
+      return { projectJson };
     } catch {
       return { message: "Data don't found" };
     }
   }
 
   public async create({ request }: HttpContextContract) {
-    let data = request.body();
-    try {
-      await Project.create({
-        nom: data.nom,
-      });
+    let { nom } = request.body();
+    const project = await Project.create({ nom: nom });
+    if (project.$isPersisted) {
       return { message: "Success" };
-    } catch {
+    } else {
       return { message: "Failed" };
     }
   }

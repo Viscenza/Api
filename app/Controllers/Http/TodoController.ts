@@ -1,7 +1,7 @@
 import type { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
 import Todo from "App/Models/Todo";
 
-export default class TodosController {
+export default class TodoController {
   public async index(ctx: HttpContextContract) {
     try {
       let todo = await Todo.all();
