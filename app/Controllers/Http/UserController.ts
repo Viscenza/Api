@@ -5,8 +5,8 @@ export default class UserController {
   public async login({ auth, request, response }: HttpContextContract) {
     const { email, password } = request.body();
     try {
-      await auth.use("api").attempt(email, password);
-      response.send({ message: "Success" });
+      const token = await auth.use("api").attempt(email, password);
+      response.send(token.user);
     } catch {
       response.unauthorized({ message: "Failed" });
     }

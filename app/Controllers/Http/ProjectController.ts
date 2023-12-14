@@ -12,9 +12,10 @@ export default class ProjectsController {
     }
   }
 
-  public async create({ request }: HttpContextContract) {
+  public async create({ auth, request }: HttpContextContract) {
     let { nom } = request.body();
-    const project = await Project.create({ nom: nom });
+    const user = auth.user;
+    const project = await Project.create({ nom: nom, user_id: user.id });
     if (project.$isPersisted) {
       return { message: "Success" };
     } else {
