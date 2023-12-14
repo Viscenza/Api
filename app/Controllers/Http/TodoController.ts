@@ -4,7 +4,6 @@ import Project from "App/Models/Project";
 
 export default class TodoController {
   public async index(ctx: HttpContextContract) {
-    //console.log(Project.$getRelation("todo").relatedModel());
     try {
       let todo = await Todo.all();
       return { todo };

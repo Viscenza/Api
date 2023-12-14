@@ -5,8 +5,7 @@ export default class ProjectsController {
   public async index(ctx: HttpContextContract) {
     try {
       let projects = await Project.all();
-      let projectJson = projects.map((project) => project.serialize());
-      console.log(projectJson);
+      const projectJson = projects.map((project) => project.serialize());
       return { projectJson };
     } catch {
       return { message: "Data don't found" };
