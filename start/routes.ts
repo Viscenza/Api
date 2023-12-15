@@ -7,7 +7,7 @@ Route.group(() => {
     Route.delete("/:id", "ProjectController.delete");
 })
   .namespace("App/Controllers/Http")
-  .middleware("auth");
+  .middleware("auth:api");
 
 // Routes for Todo
 Route.group(() => {
@@ -17,7 +17,7 @@ Route.group(() => {
     Route.delete("/:id/todo/:id_todo", "TodoController.delete");
 })
   .namespace("App/Controllers/Http")
-  .middleware("auth");
+  .middleware("auth:api");
 
 //Route for auth
 Route.group(() => {
