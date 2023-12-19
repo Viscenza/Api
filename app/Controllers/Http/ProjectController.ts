@@ -7,7 +7,7 @@ export default class ProjectsController {
     try {
       let projects = await Project.all();
       const projectJson = projects.map((project) => project.serialize());
-      return { projectJson };
+      return projectJson;
     } catch {
       return { message: "Data don't found" };
     }

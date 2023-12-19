@@ -6,7 +6,7 @@ export default class UserController {
     const { email, password } = request.body();
     try {
       const token = await auth.use("api").attempt(email, password);
-      response.ok(token);
+      response.ok({ message: token.token });
     } catch {
       response.unauthorized({ message: "Failed" });
     }
