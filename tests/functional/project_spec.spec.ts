@@ -1,34 +1,44 @@
 import { test } from "@japa/runner";
+import User from "App/Models/User";
 
-test.group("Project spec ts", () => {
-  test("test create user", async ({ client }) => {
+test.group("Project test success", () => {
+  test("test to create user", async ({ client }) => {
     const response = await client.post("/register").json({
       email: "mohamedtine17@gmail.com",
       password: "@71bis32@",
     });
 
-    response.assertBodyContains({ email: "mohamedtine17@gmail.com" });
+    //console.log(response.text);
+    response.assertBody({ message: "Success" });
     response.assertStatus(200);
   });
 
-  test("test post", async ({ client }) => {
-    const response = await client.post("/").form({
-      nom: "Mohamed",
-      user_id: 1,
-    });
+  test("test to create project", async ({ client }) => {
+    const user = await User.find(1);
+    const response = await client
+      .post("/")
+      .json({
+        user_id: 1,
+        nom: "test 12",
+      })
+      .guard("api")
+      .loginAs(user);
 
-    response.assertBodyContains({ nom: "Mohamed" });
+    response.assertBody({ message: "Success" });
     response.assertStatus(200);
   });
 
-  test("test get", async ({ client }) => {
-    const response = await client.get("/");
+  test("test dispolay projects", async ({ client }) => {
+    const user = await User.find(1);
+    const response = await client.get("/").guard("api").loginAs(user);
 
+    response.assertBody([{ id: 1, nom: "test 12", user_id: 1 }]);
     response.assertStatus(200);
   });
 
-  test("test delete", async ({ client }) => {
-    const response = await client.delete("/1");
+  test("test to delete", async ({ client }) => {
+    const user = await User.find(1);
+    const response = await client.delete("/1").guard("api").loginAs(user);
 
     response.assertStatus(200);
   });
