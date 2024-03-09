@@ -3,7 +3,7 @@ import Project from "App/Models/Project";
 import ProjectValidators from "App/Validators/Project";
 
 export default class ProjectsController {
-  public async index(ctx: HttpContextContract) {
+  public async index() {
     try {
       let projects = await Project.all();
       const projectJson = projects.map((project) => project.serialize());

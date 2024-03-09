@@ -8,13 +8,12 @@ test.group("Project test success", () => {
       password: "@71bis32@",
     });
 
-    //console.log(response.text);
     response.assertBody({ message: "Success" });
     response.assertStatus(200);
   });
 
   test("test to create project", async ({ client }) => {
-    const user = await User.find(1);
+    const user = await User.findOrFail(1);
     const response = await client
       .post("/")
       .json({
@@ -29,7 +28,7 @@ test.group("Project test success", () => {
   });
 
   test("test dispolay projects", async ({ client }) => {
-    const user = await User.find(1);
+    const user = await User.findOrFail(1);
     const response = await client.get("/").guard("api").loginAs(user);
 
     response.assertBody([{ id: 1, nom: "test 12", user_id: 1 }]);
@@ -37,7 +36,7 @@ test.group("Project test success", () => {
   });
 
   test("test to delete", async ({ client }) => {
-    const user = await User.find(1);
+    const user = await User.findOrFail(1);
     const response = await client.delete("/1").guard("api").loginAs(user);
 
     response.assertStatus(200);
