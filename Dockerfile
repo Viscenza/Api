@@ -9,7 +9,7 @@ ENV HOST=0.0.0.0
 ENV NODE_ENV=development
 ENV APP_KEY=w_D4PzbKXR5LYDXxXcOuzOadXCrAg-QV
 
-FROM node:21-alpine as runner
+FROM node:21-alpine
 WORKDIR /app
 COPY --from=build app/build app/build
 ENTRYPOINT ["node", "ace", "migration", ":", "run"]
