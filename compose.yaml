@@ -1,18 +1,18 @@
 services:
   app:
     image: api
-    command: sh -c 'yarn install --production && node app/server.js'
+    command: sh -c 'node /app/server.js'
     ports:
-      - 0.0.0.0:3333:3333
+      - 127.0.0.1:3333:3333
     working_dir: /app
     volumes:
       - ./:/app
     environment:
       MYSQL_HOST: mysql
-      MYSQL_POST: 3306
+      MYSQL_PORT: 3306
       MYSQL_USER: root
       MYSQL_PASSWORD: secret
-      MYSQL_DB: todoo
+      MYSQL_DB_NAME: todoo
 
   mysql:
     image: mysql:8.0

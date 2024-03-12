@@ -3,13 +3,13 @@ import Project from "App/Models/Project";
 import ProjectValidators from "App/Validators/Project";
 
 export default class ProjectsController {
-  public async index() {
+  public async index({ response }: HttpContextContract) {
     try {
       let projects = await Project.all();
       const projectJson = projects.map((project) => project.serialize());
-      return projectJson;
+      return response.ok(projectJson);
     } catch {
-      return { message: "Data don't found" };
+      return response.badRequest({ message: "Data don't found" });
     }
   }
 

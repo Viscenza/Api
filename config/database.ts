@@ -19,8 +19,7 @@ const databaseConfig: DatabaseConfig = {
   | file.
   |
   */
-  connection: Env.get("DB_CONNECTION"),
-
+  connection: "mysql",
   connections: {
     /*
     |--------------------------------------------------------------------------
@@ -35,13 +34,7 @@ const databaseConfig: DatabaseConfig = {
     */
     mysql: {
       client: "mysql2",
-      connection: {
-        host: Env.get("MYSQL_HOST"),
-        port: Env.get("MYSQL_PORT"),
-        user: Env.get("MYSQL_USER"),
-        password: Env.get("MYSQL_PASSWORD", ""),
-        database: Env.get("MYSQL_DB_NAME"),
-      },
+      connection: Env.get("DB_CONNECTION"),
       migrations: {
         naturalSort: true,
       },
